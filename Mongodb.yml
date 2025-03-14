@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017" # Expose the default MongoDB port
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: shubham # Replace with your username
+      MONGO_INITDB_ROOT_PASSWORD: shubham # Replace with your password

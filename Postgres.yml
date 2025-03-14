@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_server
+    ports:
+      - "5432:5432" # Maps container's port 5432 to host's port 5432
+    environment:
+      POSTGRES_USER: shubham
+      POSTGRES_PASSWORD: shubham
+      POSTGRES_DB: payload_db # Default database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist database data
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge

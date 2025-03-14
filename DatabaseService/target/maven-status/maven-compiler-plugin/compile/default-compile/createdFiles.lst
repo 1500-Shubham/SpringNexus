@@ -1,0 +1,15 @@
+com/example/elasticService/databaseService/controllers/DatabaseController.class
+com/example/elasticService/databaseService/services/KafkaProducerService.class
+com/example/elasticService/databaseService/models/SQLiteConnectionRequestHelper.class
+com/example/elasticService/databaseService/controllers/SQLiteConnectionController.class
+com/example/elasticService/databaseService/DatabaseServiceApplication.class
+com/example/elasticService/databaseService/services/PostgresService.class
+com/example/elasticService/databaseService/services/SQLiteConnectionService.class
+com/example/elasticService/databaseService/repositories/ConnectionRepository.class
+com/example/elasticService/databaseService/models/SQLiteConnectionEntity.class
+com/example/elasticService/databaseService/configurations/KafkaProducerConfig.class
+com/example/elasticService/databaseService/models/LogEntity.class
+com/example/elasticService/databaseService/controllers/ElasticKafkaController.class
+com/example/elasticService/databaseService/services/DatabaseService.class
+com/example/elasticService/databaseService/services/MongoDBService.class
+com/example/elasticService/databaseService/models/SQLiteConnectionDetailsHelper.class

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=shubham # Replace with your password
+    command: ["redis-server", "--requirepass", "shubham"] # Enforces password authentication
+    networks:
+      - redis-network
+    restart: always
+
+networks:
+  redis-network:
+    driver: bridge

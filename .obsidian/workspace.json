@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "32970bf15e69893d",
+    "type": "split",
+    "children": [
+      {
+        "id": "d23019c539df932d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "322cc8b37a04a0c0",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "ProjectFlowDiagram.canvas",
+                "viewState": {
+                  "x": -612.4702922810667,
+                  "y": 737.2847874726219,
+                  "zoom": -1.2649620219006739
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "ProjectFlowDiagram"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7f595a44efc0275e",
+    "type": "split",
+    "children": [
+      {
+        "id": "507275f057af2f6b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d8cf9bb68f0d5e16",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "69d5fd44ea185201",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "788b727f6023edbc",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "39abfd94a0500f8c",
+    "type": "split",
+    "children": [
+      {
+        "id": "373bd54764d11a52",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "004904c8f6fc33b1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Untitled.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Untitled"
+            }
+          },
+          {
+            "id": "56f61e5a7d484a56",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Untitled.canvas",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Untitled"
+            }
+          },
+          {
+            "id": "f2e02f384516c7fe",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c006fdec823e8b06",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Untitled.canvas"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Untitled"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "322cc8b37a04a0c0",
+  "lastOpenFiles": [
+    "DatabaseService/database_service.db",
+    "Ollama-LLM.md",
+    "Readme.md",
+    "Tools.md",
+    "ProjectFlowDiagram.canvas",
+    "Untitled.canvas",
+    "Flow Diagram.md"
+  ]
+}
