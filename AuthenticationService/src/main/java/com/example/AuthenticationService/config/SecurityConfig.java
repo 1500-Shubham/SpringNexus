@@ -31,7 +31,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/db/register", "/db/login","/oauth/loginOrRegister","oauth2/authorization/google","/oauth/loginFailure","/OTP/**").permitAll()
+                        .requestMatchers("/db/register", "/db/login","/oauth/loginOrRegister","oauth2/authorization/google","/oauth/loginFailure","/TwilioOTP/**","/authenticatorOTP/verfiyAndLogin").permitAll()
                         // All other requests need JWT authentication
                         .anyRequest().authenticated()
 

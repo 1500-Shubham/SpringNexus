@@ -43,7 +43,7 @@
 
 ## AuthenticationService 
 - token create | verify | forwarder userID to other service
-- DBAuth | Oauth | OTP | QRCode -> Store these users into DB
+- DBAuth | Oauth |TwilioOTP | AuthenticatorOTP&QRCode -> Store these users into DB
 
 ### DBAuth
 - Some endpoints like login/register permit all -> token generate from DB data and return JWT Service methods
@@ -84,5 +84,13 @@ then this manager uses UserDetails to fetch username and password and it know pa
     - i) OAuth2AuthenticationToken oauthToken -> null then redirect manually to oauth2/authorization/google and since you have setup defaultSuccessUrl to the same controller
     - ii) Not null next time fetch details OAuth2User from token
 
+### Twilio OTP Based
+- Just have controller and service, dont have credential to test with registered phone number
 
-### OTP Based
+### Authenticator OTP Based
+- TOTP = Time-based One-Time Password How otp generated in authenticator is matched with totp which is constant and generated once. It is generated using: 
+    - A shared secret (base32 string) — the totp_secret
+    - The current time
+- Code : Inside User Table use fields is_first_login and totp_secret, 
+    - Whenever first_login is true then give one QR code attaching TOTP GoogleAuthenticatorKey key, Qr = GoogleAuthenticatorQRGenerator.getOtpAuthURL()
+    - If first_login is false then simply match OTP from authenticator GoogleAuthenticator gAuth.authorize(user.getTotpSecret(),dto.getOtp()) // totp secret -> CurrentTime -> OTP matches

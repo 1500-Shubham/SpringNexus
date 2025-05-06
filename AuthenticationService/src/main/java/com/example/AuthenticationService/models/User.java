@@ -33,6 +33,27 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String phone;
+    @Column
+    private String totpSecret;
+
+    public String getTotpSecret() {
+        return totpSecret;
+    }
+
+    public void setTotpSecret(String totpSecret) {
+        this.totpSecret = totpSecret;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+
+    @Column
+    private boolean firstLogin = true;
 
     @Override
     public String getPassword() {

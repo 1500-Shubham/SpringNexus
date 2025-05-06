@@ -15,9 +15,9 @@
               "state": {
                 "file": "ProjectFlowDiagram.canvas",
                 "viewState": {
-                  "x": -54.248501030850235,
-                  "y": 726.5261286004818,
-                  "zoom": -1.5065878242313473
+                  "x": -730.0977884387705,
+                  "y": 914.7683677842294,
+                  "zoom": -0.9721880589749547
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -168,7 +168,17 @@
   },
   "active": "322cc8b37a04a0c0",
   "lastOpenFiles": [
-    "DatabaseService/database_service.db",
+    "AuthenticationService/src/main/java/com/example/AuthenticationService/service/AuthenticatorOTPService.java",
+    "AuthenticationService/src/main/java/com/example/AuthenticationService/controller/AuthenticatorOTPController.java",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/service/TwilioOTPService.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/service/TwilioOTPService$OTPDetails.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/controller/TwilioOTPController.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/service/DBAuthenticationService.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/controller/DBAuthController.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/dto/UserDTO.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/dto",
+    "AuthenticationService/src/main/java/com/example/AuthenticationService/dto/UserDTO.java",
+    "AuthenticationService/src/main/java/com/example/AuthenticationService/dto",
     "Ollama-LLM.md",
     "Readme.md",
     "Tools.md",

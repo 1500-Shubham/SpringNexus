@@ -1,6 +1,7 @@
 package com.example.AuthenticationService.service;
 
 import com.example.AuthenticationService.ErrorHandling.BadRequestException;
+import com.example.AuthenticationService.dto.UserDTO;
 import com.example.AuthenticationService.models.User;
 import com.example.AuthenticationService.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class DBAuthenticationService {
     }
 
     // Register a new user and return the JWT token
-    public String register(User request) {
+    public String register(UserDTO request) {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPhone(request.getPhone());
