@@ -1,6 +1,6 @@
 package com.example.elasticService.databaseService.controllers;
 
-import com.example.elasticService.databaseService.models.LogEntity;
+import com.example.elasticService.databaseService.dto.LogDTO;
 import com.example.elasticService.databaseService.services.KafkaProducerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ public class ElasticKafkaController {
     }
 
     @PostMapping
-    public ResponseEntity<String> postLog(@RequestBody LogEntity logEntity) {
+    public ResponseEntity<String> postLog(@RequestBody LogDTO dto) {
         // directly sending via API to kafka
         String logMessage = String.format("{\"message\": \"%s\", \"level\": \"%s\"}",
-                logEntity.getMessage(), logEntity.getLevel());
+                dto.getMessage(), dto.getLevel());
         System.out.println("DatabaseService"+logMessage);
         kafkaProducerService.sendLogToKafka(logMessage);
         return ResponseEntity.ok("Log sent to Kafka");

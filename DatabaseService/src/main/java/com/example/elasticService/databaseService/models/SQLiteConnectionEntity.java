@@ -1,5 +1,6 @@
 package com.example.elasticService.databaseService.models;
 
+import com.example.elasticService.databaseService.dto.ConnectionDetailsDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
@@ -24,12 +25,12 @@ public class SQLiteConnectionEntity {
     public SQLiteConnectionEntity() {
     }
 
-    public SQLiteConnectionEntity(Integer userId, String type, SQLiteConnectionDetailsHelper SQLiteConnectionDetailsHelper) throws JsonProcessingException {
+    public SQLiteConnectionEntity(Integer userId, String type, ConnectionDetailsDTO connectionDetailsDTO) throws JsonProcessingException {
         this.userId = userId;
         this.type = type;
         // Convert ConnectionDetails object to JSON String
         ObjectMapper objectMapper = new ObjectMapper();
-        this.connectionString = objectMapper.writeValueAsString(SQLiteConnectionDetailsHelper);
+        this.connectionString = objectMapper.writeValueAsString(connectionDetailsDTO);
     }
 
     // Getters and Setters

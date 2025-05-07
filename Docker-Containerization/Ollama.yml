@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_DEBUG=true
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: /bin/bash
+    command: >
+      -c "
+      ollama serve & 
+      sleep 10 && 
+      ollama pull llama2 &
+      ollama serve"
+
+volumes:
+  ollama_data:

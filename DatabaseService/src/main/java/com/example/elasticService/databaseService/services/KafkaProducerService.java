@@ -1,10 +1,14 @@
 package com.example.elasticService.databaseService.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaProducerService {
+
+    @Value("${kafka.topic-name}")
+    private String topicName;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
@@ -13,6 +17,6 @@ public class KafkaProducerService {
     }
 
     public void sendLogToKafka(String logMessage) {
-        kafkaTemplate.send("log-topic", logMessage);  // Send to "log-topic"
+        kafkaTemplate.send(topicName, logMessage);  // Send to "log-topic"
     }
 }

@@ -1,16 +1,17 @@
-package com.example.elasticService.databaseService.models;
+package com.example.elasticService.dto;
 
-public class LogEntity {
-
+public class LogDTO {
+    private String id;
     private String message;
     private String level;
 
-    // Constructors, Getters, Setters
-    public LogEntity() {}
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
 
-    public LogEntity(String message, String level) {
-        this.message = message;
-        this.level = level;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMessage() {

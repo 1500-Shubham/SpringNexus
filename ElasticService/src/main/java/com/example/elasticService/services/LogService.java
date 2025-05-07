@@ -1,5 +1,6 @@
 package com.example.elasticService.services;
 
+import com.example.elasticService.dto.LogDTO;
 import com.example.elasticService.models.LogEntity;
 import com.example.elasticService.repositories.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ public class LogService {
     private LogRepository logRepository;
 
     // Save log
-    public LogEntity saveLog(LogEntity log) {
-        return logRepository.save(log);
+    public LogEntity saveLog(LogDTO log) {
+        LogEntity logEntity=new LogEntity();
+        logEntity.setMessage(log.getMessage());
+        logEntity.setLevel(log.getLevel());
+        return logRepository.save(logEntity);
     }
 
     // Method to retrieve all logs

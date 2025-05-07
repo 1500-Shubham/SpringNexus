@@ -6,6 +6,7 @@ import com.example.elasticService.models.LogEntity;
 import com.example.elasticService.repositories.LogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,11 @@ public class KafkaDatabaseElastic {
     @Autowired
     private LogRepository logRepository;
 
-    @KafkaListener(topics = "log-topic", groupId = "log-consumer-group")
+    // defined a component bean for these values in KafkaListenerConfig to inject value at compile time
+    @KafkaListener(topics = "#{@myKafkaConfig.topicName}", groupId = "#{@myKafkaConfig.kafkaGroupId}")
     public void consume(String message) {
         try {
+            // this message is in JSON form {"message":"msg","level":"INFO"};
 //            System.out.println("My message looks like: " + message);
             // Deserialize the Kafka message
             ObjectMapper objectMapper = new ObjectMapper();

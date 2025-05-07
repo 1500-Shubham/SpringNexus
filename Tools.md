@@ -82,7 +82,9 @@
 
 # MongoDb
 - mongosh
+- mongosh --username shubham --password shubham --authenticationDatabase admin (then enter and use db. queries)
 - use payload_db | admin
+- db.auth("your_username", "your_password")
 - db.createCollection("movies")
 - db.movies.insertOne({ id_: ObjectId(), data: { movie: "heraPheri", rating: "10" } })
 - db.movies.find().pretty()

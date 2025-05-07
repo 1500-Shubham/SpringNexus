@@ -1,6 +1,8 @@
 package com.example.OllamaService.controllers;
 
+import com.example.OllamaService.dto.OllamaDTO;
 import com.example.OllamaService.services.OllamaLocalService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,10 +16,7 @@ public class OllamaController {
     }
 
     @PostMapping("/askQuestion")
-    public String generateResponse(
-            @RequestParam String model,
-            @RequestParam String system,
-            @RequestParam String prompt) {
-        return ollamaLocalService.getOllamaResponse(model, system, prompt);
+    public ResponseEntity<?> generateResponse(@RequestBody OllamaDTO dto) {
+        return ollamaLocalService.getOllamaResponse(dto.getModel(), dto.getSystem(), dto.getPrompt());
     }
 }

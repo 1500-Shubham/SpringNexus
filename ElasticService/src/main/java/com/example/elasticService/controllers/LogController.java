@@ -1,5 +1,6 @@
 package com.example.elasticService.controllers;
 
+import com.example.elasticService.dto.LogDTO;
 import com.example.elasticService.models.LogEntity;
 import com.example.elasticService.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class LogController {
     }
 
     @PostMapping
-    public LogEntity createLog(@RequestBody LogEntity log) {
+    public LogEntity createLog(@RequestBody LogDTO log) {
         System.out.println("Create Log" + log);
         return logService.saveLog(log);
     }

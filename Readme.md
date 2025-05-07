@@ -1,11 +1,13 @@
 ## ElasticService
-- This is consumer of Kafka
+- This is consumer of Kafka (need Kafka server running beforehand)
 - POST message from Kafka to Elastic
 - Steps:
     - Kafka & Elastic configuration in application properties
     - kafkaListenerContainerFactory KafkaConfig
     - Elastic Data format -> Model define and extends ElasticsearchRepository (JPA modelling table -> Functions)
-    - KafkaListener any method receive message -> logRepo.save(message)
+    - KafkaListener any method(topics = "log-topic", groupId = "log-consumer-group") receive message -> logRepo.save(message)
+    - Kafka.yml and Elastic Dockerfile to build images and expose their endpoint
+- Set Up Kibana image for port 5601 for elastic data to observe
 
 ## DatabaseService
 - Postgres.yml | Redis.yml | Mongodb.yml host port username password

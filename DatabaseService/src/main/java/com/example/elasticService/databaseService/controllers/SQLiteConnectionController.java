@@ -1,8 +1,8 @@
 package com.example.elasticService.databaseService.controllers;
 
-import com.example.elasticService.databaseService.models.SQLiteConnectionDetailsHelper;
+import com.example.elasticService.databaseService.dto.ConnectionDetailsDTO;
+import com.example.elasticService.databaseService.dto.ConnectionRequestDTO;
 import com.example.elasticService.databaseService.models.SQLiteConnectionEntity;
-import com.example.elasticService.databaseService.models.SQLiteConnectionRequestHelper;
 import com.example.elasticService.databaseService.services.SQLiteConnectionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +22,12 @@ public class SQLiteConnectionController {
 
     // Create a new connection (requires userId, connection type, and connection details)
     @PostMapping("/create")
-    public  List<SQLiteConnectionEntity> createConnection(@RequestParam Integer userId, @RequestBody SQLiteConnectionRequestHelper SQLiteConnectionRequestHelper) throws Exception {
-
+    public  List<SQLiteConnectionEntity> createConnection(@RequestParam Integer userId, @RequestBody ConnectionRequestDTO connectionRequestDTO) throws Exception {
         // Extract type and connection details from the request
-        String type = SQLiteConnectionRequestHelper.getType();
-        SQLiteConnectionDetailsHelper SQLiteConnectionDetailsHelper = SQLiteConnectionRequestHelper.getConnectionDetails();
-
-        return SQLiteConnectionService.createConnection(userId, type, SQLiteConnectionDetailsHelper);
+        String type = connectionRequestDTO.getType();
+        ConnectionDetailsDTO connectionDetailsDTO = connectionRequestDTO.getConnectionDetailsDTO();
+//        System.out.println("connectionDetailsDTO" + connectionDetailsDTO);
+        return SQLiteConnectionService.createConnection(userId, type, connectionDetailsDTO);
     }
 
     // Delete a connection by userId and connection ID

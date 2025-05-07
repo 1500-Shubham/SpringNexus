@@ -5,20 +5,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import jakarta.json.JsonObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class OllamaLocalService {
     // local ollama installed via homebrew
 
     private final RestTemplate restTemplate = new RestTemplate(); // Initialize RestTemplate
-    private final String apiUrl = "http://localhost:11434/api/generate"; // API endpoint
+    @Value("${ollama.server}")
+    private String apiUrl;
     private final ObjectMapper objectMapper = new ObjectMapper(); // Jackson ObjectMapper
 
 
-    public String getOllamaResponse(String model, String systemPrompt, String userPrompt) {
+    public ResponseEntity<?> getOllamaResponse(String model, String systemPrompt, String userPrompt) {
         try {
             // Create the JSON request body using Jackson
             ObjectNode requestBody = objectMapper.createObjectNode();
@@ -41,12 +46,11 @@ public class OllamaLocalService {
             // Parse the response JSON and extract the "response" field
             JsonNode responseNode = objectMapper.readTree(jsonResponse); // Parse JSON response
             String response = responseNode.get("response").asText(); // Extract "response" field
-
-            return response; // Return the extracted response field
+            return ResponseEntity.of(Optional.of(Map.of("response", response))); // Return the extracted response field
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error: Unable to fetch response from Ollama API.";
+            return ResponseEntity.of(Optional.of(Map.of("response", "Error: Unable to fetch response from Ollama API.")));
         }
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ConnectionRepository extends JpaRepository<SQLiteConnectionEntity, Long> {
+public interface SQLConnectionRepository extends JpaRepository<SQLiteConnectionEntity, Long> {
     List<SQLiteConnectionEntity> findByUserId(Integer userId);  // Fetch connections by user_id
 
 
