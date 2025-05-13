@@ -50,7 +50,7 @@ public class OllamaLocalService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.of(Optional.of(Map.of("response", "Error: Unable to fetch response from Ollama API.")));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Optional.of(Map.of("response", "Error: Unable to fetch response from Ollama API.")));
         }
     }
 }
