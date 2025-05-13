@@ -1,0 +1,40 @@
+# Yml for authentication service alone
+
+version: '1.0'
+
+services:
+  authentication-service:
+    image: authentication_service:${PROFILE}
+    container_name: auth-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROFILE: ${PROFILE}
+    ports:
+      - "${AUTHENTICATION_SERVICE_PORT}:8083"  # Host:Container
+    environment:
+      SPRING_PROFILES_ACTIVE: ${PROFILE}
+      AUTHENTICATION_SERVICE_JWT_SECRET: ${AUTHENTICATION_SERVICE_JWT_SECRET}
+      AUTHENTICATION_SERVICE_SQLLITEDB: /volume/database_service.db
+
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+
+      DATABASE_SERVICE_URL: ${DATABASE_SERVICE_URL}
+      AUTHENTICATION_SERVICE_URL: ${AUTHENTICATION_SERVICE_URL}
+      OLLAMA_SERVICE_URL: ${OLLAMA_SERVICE_URL}
+    volumes:
+      - ${AUTHENTICATION_SERVICE_SQLLITEDB}:/volume/database_service.db:rw
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+    
+networks:
+  spring-nexus:
+    external: true
+# NEED EXTERNAL NETWORK docker network create spring-nexus

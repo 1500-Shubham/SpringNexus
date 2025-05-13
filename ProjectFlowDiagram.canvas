@@ -1,25 +1,29 @@
 {
 	"nodes":[
-		{"id":"3ae968ef045b4240","type":"text","text":"Authentication Service\n- SQLite DB\n\tUsername, Password, Token Expiration \n- Oauth Mechanism \n\tGoogle\n- OTP (Authenticator 2FA Type)\n\tGenerate token\n\n\n\n\nToken -> Forward to database service -> Forward USER_ID necessary for connection_table creation\n\n\n\n\n\n","x":-920,"y":300,"width":780,"height":780},
-		{"id":"82e89f39aff9d90e","type":"text","text":"Next.js \n","x":-1360,"y":515,"width":250,"height":60},
-		{"id":"8808312566a3e15e","type":"text","text":"USER","x":-1600,"y":515,"width":105,"height":60},
-		{"id":"b2b46b348d1ac960","type":"text","text":"\t\tLearnings: Sweden 2025\n\t\t\t\n\t\t\t1:Deployment\nDocker\nKubernetes\nEKS Amazon\n\n\t\t\t2:TechStack\nSpringboot Auth API Ollama\nNext.js Basic Frontend\n\n\t\t\t3:AWS\nBasics of all component use and code","x":-1620,"y":680,"width":376,"height":500},
-		{"id":"dcbec04934a718b8","type":"text","text":"DB Auth\nlogin and register permitAll\nToken return and user details saved","x":-844,"y":567,"width":250,"height":133},
-		{"id":"0f1cda6c6f268b34","type":"text","text":"Oauth\nGoogleSign oauthToken-> UserCreate and then Token returned for JWTFilter","x":-844,"y":747,"width":250,"height":160},
-		{"id":"aafac4d35138acea","type":"text","text":"OTP Based + QRCode Authenticator TOTP way","x":-844,"y":967,"width":250,"height":60},
-		{"id":"b81bfa5ca3dde831","type":"text","text":"JWT TOKEN Generate passes throught JWT Filter\nAll endpoints Secured\n\n\nUser Info Saved IN DB for all cases and then the token is generated and verified\n\nStore password using RSA Encryptor, also keys store in DB real time fetch that key\n\n\nFORWARDER FOR APIS","x":-460,"y":678,"width":250,"height":252},
-		{"id":"fe68d16047d78104","type":"text","text":"Elastic Service\n\n\nStore LogEntity- {message:val1, level:val2}\nCRUD and searching operation APIS\n","x":920,"y":-220,"width":400,"height":180},
-		{"id":"6574be8b1a34fca3","type":"text","text":"Ollama Service\n- System Prompt\n- User Prompt\n- Response Generate","x":-40,"y":847,"width":400,"height":180},
-		{"id":"e853b029ad3d23fc","type":"text","text":"Database Service (Token from AuthService)\nStore \n- map<token,vector< connections >> locally\n- SQLLite connectionTable \n\t- ConnectionTable {connId, userId, type, connectionString}\n\t\nConnection Service (Everything SQLite mein CRUD)\nAPIS:\n- createConnection (token,type,connectionDetails)\n- deleteConnection (token, connectionID)\n- fetchAllConnections(token)->storeLocally\n-Logout -> delete token from map\n\nQueryService\n- Connect To all Connections using map then query and store\nPayload To Store in \n\t-Postgres(Table row column) \n\t-Redis (store as token, key value)\n\t-MongoDB (as JSON) \nExample: \n{key1 , key2 , key3 : value1,2,3}\n\nEach API -> ElasticSearch Store Logs\n\n","x":20,"y":-680,"width":680,"height":640}
+		{"id":"3ae968ef045b4240","type":"text","text":"Authentication Service\n- SQLite DB\n\tUsername, Password, Token Expiration \n- Oauth Mechanism \n\tGoogle\n- OTP (Authenticator 2FA Type)\n\tGenerate token\n\n\n\n\nToken -> Return user_id after verfication to other services\n\n\n\n\n\n\n","x":-1290,"y":-260,"width":810,"height":940,"color":"#26cf9c"},
+		{"id":"dcbec04934a718b8","type":"text","text":"DB Auth\nlogin and register permitAll\nToken return and user details saved","x":-1238,"y":37,"width":250,"height":133,"color":"#26cf9c"},
+		{"id":"b81bfa5ca3dde831","type":"text","text":"JWT TOKEN Generate passes throught JWT Filter\nAll endpoints Secured\n\n\nUser Info Saved IN DB for all cases and then the token is generated and verified\n\nStore password using RSA Encryptor, also keys store in DB real time fetch that key\n\n\nFORWARDER FOR APIS","x":-854,"y":148,"width":250,"height":252,"color":"#26cf9c"},
+		{"id":"0f1cda6c6f268b34","type":"text","text":"Oauth\nGoogleSign oauthToken-> UserCreate and then Token returned for JWTFilter","x":-1238,"y":217,"width":250,"height":160,"color":"#26cf9c"},
+		{"id":"aafac4d35138acea","type":"text","text":"OTP Based + QRCode Authenticator TOTP way","x":-1238,"y":437,"width":250,"height":60,"color":"#26cf9c"},
+		{"id":"0c50fad4c7cbd928","type":"text","text":"Nginx ","x":-1831,"y":-95,"width":122,"height":60,"color":"#26cf9c"},
+		{"id":"a72db989e7b508b8","type":"text","text":"USER","x":-2010,"y":-90,"width":105,"height":50,"color":"#26cf9c"},
+		{"id":"e853b029ad3d23fc","type":"text","text":"Database Service (User_ID from NGINX)\nStore \n- map<user_id,vector< connections >> locally\n- SQLLite connectionTable \n\t- ConnectionTable {connId, userId, type, connectionString}\n\t\nConnection Service (Everything SQLite mein CRUD)\nAPIS:\n- createConnection (user_id,type,connectionDetails)\n- deleteConnection (user_id, connectionID)\n- fetchAllConnections(user_id)->storeLocally\n-Logout -> delete user_id from map\n\nQueryService\n- Connect To all Connections using map then query and store\nPayload To Store in \n\t-Postgres(Table row column) \n\t-Redis (store as user_id, key value)\n\t-MongoDB (as JSON) \nExample: \n{key1 , key2 , key3 : value1,2,3}\n\nEach API -> ElasticSearch Store Logs\n\n","x":-80,"y":-260,"width":680,"height":640,"color":"#26cf9c"},
+		{"id":"fe68d16047d78104","type":"text","text":"Elastic Service\n\n\nStore LogEntity- {message:val1, level:val2}\nCRUD and searching operation APIS\n","x":880,"y":-44,"width":400,"height":180,"color":"#26cf9c"},
+		{"id":"6574be8b1a34fca3","type":"text","text":"Ollama Service\n- System Prompt\n- User Prompt\n- Response Generate","x":-40,"y":500,"width":400,"height":180,"color":"#26cf9c"},
+		{"id":"b2b46b348d1ac960","type":"text","text":"\t\tLearnings: Sweden 2025\n\t\t\t\n\t\t\t1:Deployment\nDocker\nKubernetes\nEKS Amazon\n\n\t\t\t2:TechStack\nSpringboot Auth API Ollama\nNext.js Basic Frontend\n\n\t\t\t3:AWS\nBasics of all component use and code","x":-1897,"y":180,"width":376,"height":500,"color":"#26cf9c"},
+		{"id":"1e39314e13135627","type":"text","text":"React Frontend\n","x":-1560,"y":-260,"width":166,"height":50,"color":"#26cf9c"},
+		{"id":"3d95867ebf71a4fa","type":"text","text":"Forward All URL \nWith API Request Contaninig User_ID","x":-400,"y":71,"width":244,"height":99,"color":"#26cf9c"}
 	],
 	"edges":[
 		{"id":"b85fa44aecad9232","fromNode":"e853b029ad3d23fc","fromSide":"right","toNode":"fe68d16047d78104","toSide":"left","label":"Kafka Log Store"},
-		{"id":"e5cfd95afc031681","fromNode":"3ae968ef045b4240","fromSide":"right","toNode":"e853b029ad3d23fc","toSide":"left","label":"Forwarder\nAll APIs\n(Token Forward)"},
-		{"id":"18e7337699cd13f4","fromNode":"3ae968ef045b4240","fromSide":"right","toNode":"6574be8b1a34fca3","toSide":"top"},
 		{"id":"33f819b4cc8df201","fromNode":"dcbec04934a718b8","fromSide":"right","toNode":"b81bfa5ca3dde831","toSide":"left"},
 		{"id":"0d423d48846e006d","fromNode":"0f1cda6c6f268b34","fromSide":"right","toNode":"b81bfa5ca3dde831","toSide":"left"},
 		{"id":"2b301d89b6648fc6","fromNode":"aafac4d35138acea","fromSide":"right","toNode":"b81bfa5ca3dde831","toSide":"left"},
-		{"id":"54a6357c7642d5f7","fromNode":"8808312566a3e15e","fromSide":"right","toNode":"82e89f39aff9d90e","toSide":"left"},
-		{"id":"0a9f98a7bb4ed600","fromNode":"82e89f39aff9d90e","fromSide":"right","toNode":"3ae968ef045b4240","toSide":"left"}
+		{"id":"17d73bf0e190a448","fromNode":"3ae968ef045b4240","fromSide":"right","toNode":"e853b029ad3d23fc","toSide":"left"},
+		{"id":"f47681abc038c6bc","fromNode":"3ae968ef045b4240","fromSide":"right","toNode":"6574be8b1a34fca3","toSide":"left"},
+		{"id":"61e501b8b3b8b514","fromNode":"0c50fad4c7cbd928","fromSide":"right","toNode":"1e39314e13135627","toSide":"left"},
+		{"id":"4501a9628c146a54","fromNode":"a72db989e7b508b8","fromSide":"right","toNode":"0c50fad4c7cbd928","toSide":"left"},
+		{"id":"f057220758a47e85","fromNode":"0c50fad4c7cbd928","fromSide":"right","toNode":"3ae968ef045b4240","toSide":"left"},
+		{"id":"7b6a1ae3deff0fc7","fromNode":"1e39314e13135627","fromSide":"right","toNode":"3ae968ef045b4240","toSide":"left"}
 	]
 }

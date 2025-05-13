@@ -9,3 +9,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: shubham # Replace with your username
       MONGO_INITDB_ROOT_PASSWORD: shubham # Replace with your password
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+    
+networks:
+  spring-nexus:
+    external: true

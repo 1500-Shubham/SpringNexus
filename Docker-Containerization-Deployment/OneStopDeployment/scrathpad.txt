@@ -1,0 +1,38 @@
+1- DockerFile of BackendApplication
+    To optimize the Dockerfile, you only need to copy:
+    The Maven wrapper (mvnw and .mvn) for building.
+    The pom.xml to resolve dependencies.
+    The src/ directory for source code.
+
+#image name to Dockerfile
+docker build --build-arg PROFILE=prod -t authentication_service:prod .
+docker build --build-arg PROFILE=prod -t database_service:prod .
+docker build --build-arg PROFILE=prod -t ollama_service:prod .
+docker build --build-arg PROFILE=prod -t elastic_service:prod .
+
+#Separetly run yml of this service
+docker-compose.yml and .env inside it 
+
+#Combine images of everything
+docker compose --env-file .env up -d
+
+#Compose up normal yml files
+docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
+
+// SAME NETWORK 
+For one container to understand other container name and ip make sure both are on same NETWORK
+EX: authentication_service env DATABASE_SERVICE_URL=http://database-service:8081 will only work
+
+// ALSO MAKE SURE
+Root Cause: Separate docker-compose files → Separate Networks
+Even though both services declare spring-nexus as their network in their own docker-compose files, 
+Docker creates separate networks with similar names scoped to each compose project, 
+unless you explicitly share the same external network.
+
+METHOD-1 ALL Container in same yml file and same network
+METHOD-2 Diffenent container on different yml and external network
+docker network create spring-nexus
+networks:
+  spring-nexus:
+    external: true
+

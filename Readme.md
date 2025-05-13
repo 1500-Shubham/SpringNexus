@@ -8,6 +8,9 @@
     - KafkaListener any method(topics = "log-topic", groupId = "log-consumer-group") receive message -> logRepo.save(message)
     - Kafka.yml and Elastic Dockerfile to build images and expose their endpoint
 - Set Up Kibana image for port 5601 for elastic data to observe
+- Using Elastic
+    - Method-1 Can directly use ElasticRepository extending your LogRepo
+    - Method-2 Define Bean and create ElasticClient and then perform CRUD
 
 ## DatabaseService
 - Postgres.yml | Redis.yml | Mongodb.yml host port username password
@@ -44,7 +47,10 @@
 
 
 ## AuthenticationService 
-- token create | verify | forwarder userID to other service
+- token create from various methods, then this token will be to create user_id and pass to other services inside Request of API
+    -   Created a forwarder controller inside which all endpoints will be send (capturing: request, method, body)- Since this is jwt filter passed, extract user_id for this token
+    - Create HttpEntity freshly and breakdown url according to other service endpoint
+    - Setting user_id inside headers and pass to other services
 - DBAuth | Oauth |TwilioOTP | AuthenticatorOTP&QRCode -> Store these users into DB
 
 ### DBAuth
@@ -96,3 +102,11 @@ then this manager uses UserDetails to fetch username and password and it know pa
 - Code : Inside User Table use fields is_first_login and totp_secret, 
     - Whenever first_login is true then give one QR code attaching TOTP GoogleAuthenticatorKey key, Qr = GoogleAuthenticatorQRGenerator.getOtpAuthURL()
     - If first_login is false then simply match OTP from authenticator GoogleAuthenticator gAuth.authorize(user.getTotpSecret(),dto.getOtp()) // totp secret -> CurrentTime -> OTP matches
+
+## Nginx
+- Created a nginx.yml file to have nginx image and provided nginx config which has location to server mapping for forwarding.
+- Mounted nginx.conf local to container location 
+
+## Deployment
+- 1) Docker-Containerization (scratch.txt for all documentation)
+- 2) Kubernetes

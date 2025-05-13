@@ -1,0 +1,201 @@
+services:
+  authentication-service:
+    image: authentication_service:${PROFILE}
+    container_name: auth-service
+    ports:
+      - "${AUTHENTICATION_SERVICE_PORT}:8083"  # Host:Container
+    environment:
+      SPRING_PROFILES_ACTIVE: ${PROFILE}
+      AUTHENTICATION_SERVICE_JWT_SECRET: ${AUTHENTICATION_SERVICE_JWT_SECRET}
+      AUTHENTICATION_SERVICE_SQLLITEDB: /volume/database_service.db
+
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+
+      DATABASE_SERVICE_URL: ${DATABASE_SERVICE_URL}
+      AUTHENTICATION_SERVICE_URL: ${AUTHENTICATION_SERVICE_URL}
+      OLLAMA_SERVICE_URL: ${OLLAMA_SERVICE_URL}
+    volumes:
+      - ${AUTHENTICATION_SERVICE_SQLLITEDB}:/volume/database_service.db:rw
+    networks:
+      - spring-nexus
+    depends_on:
+      - nginx
+    restart: unless-stopped
+  database-service:
+    image: database_service:${PROFILE}
+    container_name: database-service
+    ports:
+      - "${DATABASE_SERVICE_PORT}:8081"  # Host:Container
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS}
+      KAFKA_TOPIC_NAME: ${KAFKA_TOPIC_NAME}
+      # SQLite path inside container
+      DATABASE_SQLITE_PATH: /volume/database_service.db
+    volumes:
+      - ${DATABASE_SQLITE_PATH}:/volume/database_service.db:rw
+    networks:
+      - spring-nexus
+    depends_on:
+      - kafka
+      - mongodb
+      - postgres
+      - redis
+    restart: unless-stopped
+  elastic-service:
+    image: elastic_service:${PROFILE}
+    container_name: elastic_service
+    ports:
+      - "${ELASTIC_PORT}:8084"  # Host:Container
+    environment:
+      ELASTIC_REACTIVE_CLIENT_ENABLED: ${ELASTIC_REACTIVE_CLIENT_ENABLED}
+      ELASTIC_CLUSTER_NODES: ${ELASTIC_CLUSTER_NODES}
+      ELASTIC_CLUSTER_NAME: ${ELASTIC_CLUSTER_NAME}
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS}
+      KAFKA_CONSUMER_GROUP_ID: ${KAFKA_CONSUMER_GROUP_ID}
+      KAFKA_CONSUMER_TOPIC_NAME: ${KAFKA_CONSUMER_TOPIC_NAME}
+      KAFKA_AUTO_OFFSET_RESET: ${KAFKA_AUTO_OFFSET_RESET}
+      
+    networks:
+      - spring-nexus
+    depends_on:
+      - kafka
+    restart: no
+  ollama-service:
+    image: ollama_service:${PROFILE}
+    container_name: ollama-service
+    ports:
+      - "${OLLAMA_SERVICE_PORT}:8082"  # Host:Container
+    environment:
+      OLLAMA_SERVER_URL: ${OLLAMA_SERVER_URL}
+
+    networks:
+      - spring-nexus
+    depends_on:
+      - ollama
+    restart: unless-stopped
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - spring-nexus
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: kafka-zooker  # Renamed container
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-zooker:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017" # Expose the default MongoDB port
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: shubham # Replace with your username
+      MONGO_INITDB_ROOT_PASSWORD: shubham # Replace with your password
+    volumes:
+    - ${ALL_DB_MOUNTING}/mongo/db:/data/db
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest
+    container_name: nginx_gateway
+    ports:
+      - "80:80"  # Exposes NGINX on host port 80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_DEBUG=true
+    volumes:
+      - ${ALL_DB_MOUNTING}/ollama:/root/.ollama
+    entrypoint: /bin/bash
+    command: >
+      -c "
+      ollama serve & 
+      sleep 10 && 
+      ollama pull llama2 &
+      ollama serve"
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+  postgres:
+    image: postgres:latest
+    container_name: postgres_server
+    ports:
+      - "5432:5432" # Maps container's port 5432 to host's port 5432
+    environment:
+      POSTGRES_USER: shubham
+      POSTGRES_PASSWORD: shubham
+      POSTGRES_DB: payload_db # Default database
+    volumes:
+      - ${ALL_DB_MOUNTING}/postgresql/data:/var/lib/postgresql/data # Persist database data
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=shubham # Replace with your password
+    command: ["redis-server", "--requirepass", "shubham"] # Enforces password authentication
+    networks:
+      - spring-nexus
+    volumes:
+    - ${ALL_DB_MOUNTING}/redis/data:/data
+    restart: unless-stopped
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
+    container_name: elastic-search
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+      # - ELASTIC_PASSWORD=changeme  # 🔐 Set password for default user "elastic"
+    ports:
+      - "9200:9200"  # HTTP port
+      - "9300:9300"  # Internal transport port
+    volumes:
+      - ${ALL_DB_MOUNTING}/elasticsearch/data:/usr/share/elasticsearch/data  # Persist data across container restarts
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+               
+networks:
+  spring-nexus:
+    external: true
+# NEED EXTERNAL NETWORK docker network create spring-nexus

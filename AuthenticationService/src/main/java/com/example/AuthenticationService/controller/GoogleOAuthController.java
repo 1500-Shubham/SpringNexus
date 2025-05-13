@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/oauth")
 public class GoogleOAuthController {
-
-    @Autowired
-    private GoogleOAuthService googleOAuthService;
-
+    
+    private final GoogleOAuthService googleOAuthService;
+    public GoogleOAuthController(GoogleOAuthService googleOAuthService) {
+        this.googleOAuthService = googleOAuthService;
+    }
 
     @GetMapping("/loginOrRegister")
     public ResponseEntity<String> loginWithGoogle(OAuth2AuthenticationToken oauthToken) {

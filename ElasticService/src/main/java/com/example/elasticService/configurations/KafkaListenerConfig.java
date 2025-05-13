@@ -25,6 +25,7 @@ public class KafkaListenerConfig {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        System.out.println("BEAN Config"+kafkaServer+kafkaGroupId);
         Map<String, Object> consumerConfigs = new HashMap<>();
         consumerConfigs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         consumerConfigs.put(ConsumerConfig.GROUP_ID_CONFIG,kafkaGroupId);

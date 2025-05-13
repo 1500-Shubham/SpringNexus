@@ -10,9 +10,9 @@ services:
       - REDIS_PASSWORD=shubham # Replace with your password
     command: ["redis-server", "--requirepass", "shubham"] # Enforces password authentication
     networks:
-      - redis-network
-    restart: always
-
+      - spring-nexus
+    restart: unless-stopped
+    
 networks:
-  redis-network:
-    driver: bridge
+  spring-nexus:
+    external: true

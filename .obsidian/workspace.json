@@ -15,9 +15,9 @@
               "state": {
                 "file": "ProjectFlowDiagram.canvas",
                 "viewState": {
-                  "x": -490.12783439410265,
-                  "y": 792.5105863666745,
-                  "zoom": -0.2965693381076514
+                  "x": -747.1369320896121,
+                  "y": 79.88232602996374,
+                  "zoom": -0.7858674623607882
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -166,8 +166,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d8cf9bb68f0d5e16",
+  "active": "1f4279db67461ad1",
   "lastOpenFiles": [
+    "AuthenticationService/target/classes/com/example/AuthenticationService/controller/ForwarderController.class",
+    "DatabaseService/target/classes/com/example/elasticService/databaseService/controllers/DatabaseController.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/service/AuthenticatorOTPService.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/controller/AuthenticatorOTPController.class",
+    "AuthenticationService/target/classes/com/example/AuthenticationService/controller/DBAuthController.class",
     "ElasticSearch.yml",
     "OllamaService/target/classes/com/example/OllamaService/dto/OllamaDTO.class",
     "OllamaService/target/classes/com/example/OllamaService/dto",
@@ -177,11 +182,6 @@
     "fsdfsdf.md.md",
     "Untitled.canvas",
     "ProjectFlowDiagram.canvas",
-    "DatabaseService/target/classes/com/example/elasticService/databaseService/repositories/SQLConnectionRepository.class",
-    "DatabaseService/target/classes/com/example/elasticService/databaseService/controllers/SQLiteConnectionController.class",
-    "DatabaseService/database_service.db-journal",
-    "DatabaseService/target/classes/com/example/elasticService/databaseService/services/KafkaProducerService.class",
-    "DatabaseService/target/classes/com/example/elasticService/databaseService/controllers/ElasticKafkaController.class",
     "Ollama-LLM.md",
     "Readme.md",
     "Tools.md",

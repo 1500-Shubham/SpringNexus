@@ -109,3 +109,6 @@
 - DEL user:1
 - EXISTS user:1
 - KEYS *
+
+# Nginx
+- Define nginx rule and forward request to appropriate service

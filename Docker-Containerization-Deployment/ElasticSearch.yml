@@ -3,23 +3,30 @@ version: "3.8"
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
-    container_name: elasticsearch
+    container_name: elastic-search
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - xpack.security.enrollment.enabled=false
+      # - ELASTIC_PASSWORD=changeme  # 🔐 Set password for default user "elastic"
     ports:
       - "9200:9200"  # HTTP port
       - "9300:9300"  # Internal transport port
     volumes:
       - esdata:/usr/share/elasticsearch/data  # Persist data across container restarts
     networks:
-      - es_network
-    restart: always  # Automatically restart if the container stops
+      - spring-nexus
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    
+networks:
+  spring-nexus:
+    external: true
 
 volumes:
   esdata:
 
-networks:
-  es_network:
-    driver: bridge

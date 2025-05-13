@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticatorOTPService {
 
     private final UserRepository userRepository;

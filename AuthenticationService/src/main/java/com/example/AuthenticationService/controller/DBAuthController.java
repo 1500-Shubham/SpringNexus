@@ -45,11 +45,6 @@ public class DBAuthController {
     }
 
     // Protected endpoint: Only accessible with valid JWT
-    @GetMapping("/test")
-    public ResponseEntity<String> testJwtAuthentication(@RequestHeader("Authorization") String authHeader) {
-        // Extract token from "Authorization: Bearer <token>"
-        String username = DBAuthenticationService.test(authHeader);
-        return ResponseEntity.ok("Hello, " + username + "! Your token is valid.");
-    }
+
 }
 

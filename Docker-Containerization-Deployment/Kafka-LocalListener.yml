@@ -1,19 +1,18 @@
-version: '3.7'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
-    container_name: zookeeper
+    container_name: zookeeperLocal
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
     networks:
-      - kafka_zookeeper_network
+      - spring-nexus
 
   kafka:
     image: confluentinc/cp-kafka:7.3.0
-    container_name: kafka-zooker  # Renamed container
+    container_name: kafka-zooker-local  # Renamed container
     depends_on:
       - zookeeper
     environment:
@@ -25,8 +24,9 @@ services:
     ports:
       - "9092:9092"
     networks:
-      - kafka_zookeeper_network
-
+      - spring-nexus
+    restart: unless-stopped
+    
 networks:
-  kafka_zookeeper_network:
-    driver: bridge
+  spring-nexus:
+    external: true

@@ -17,6 +17,13 @@ services:
       sleep 10 && 
       ollama pull llama2 &
       ollama serve"
-
+    networks:
+      - spring-nexus
+    restart: unless-stopped
+    
+networks:
+  spring-nexus:
+    external: true
+    
 volumes:
   ollama_data:
