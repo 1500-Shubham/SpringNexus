@@ -3,10 +3,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sqlite-pvc
-  namespace: springnexus
+  namespace: spring-nexus
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: "" # MUST match PV
   resources:
     requests:
       storage: 1Gi

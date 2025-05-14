@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springnexus-config
+  namespace: spring-nexus
+data:
+  PROFILE: prod
+
+  # Service ports
+  AUTHENTICATION_SERVICE_PORT: "8083"
+  DATABASE_SERVICE_PORT: "8081"
+  ELASTIC_PORT: "8084"
+  OLLAMA_SERVICE_PORT: "8082"
+
+  # SQLite path (inside container)
+  AUTHENTICATION_SERVICE_SQLLITEDB: /volume/database_service.db
+  DATABASE_SQLITE_PATH: /volume/database_service.db
+
+  # Google OAuth
+  GOOGLE_CLIENT_ID: 413306604455-q1uog5j3ma0vcpm2c0ub3m2baipllot0.apps.googleusercontent.com
+  GOOGLE_CLIENT_SECRET: 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
+
+  # Twilio
+  TWILIO_ACCOUNT_SID: AC9b62583c29c7877372293172c1429f93
+  TWILIO_PHONE_NUMBER: "+18129004263"
+
+  # URLs (use internal service names)
+  DATABASE_SERVICE_URL: http://database-service:8081
+  AUTHENTICATION_SERVICE_URL: http://auth-service:8083
+  OLLAMA_SERVICE_URL: http://ollama-service:8082
+  OLLAMA_SERVER_URL: http://ollama:11434/api/generate
+
+  # Kafka / Elastic config
+  KAFKA_BOOTSTRAP_SERVERS: kafka-zooker:9092
+  KAFKA_TOPIC_NAME: log-topic
+  KAFKA_CONSUMER_GROUP_ID: log-consumer-group
+  KAFKA_CONSUMER_TOPIC_NAME: log-topic
+  KAFKA_AUTO_OFFSET_RESET: earliest
+  ELASTIC_REACTIVE_CLIENT_ENABLED: "false"
+  ELASTIC_CLUSTER_NODES: elastic-search:9200
+  ELASTIC_CLUSTER_NAME: docker-cluster

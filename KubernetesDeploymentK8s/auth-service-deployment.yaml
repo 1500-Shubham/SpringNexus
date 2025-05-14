@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service-deployment
+  namespace: spring-nexus
+  labels:
+    app: auth-service
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+        component: auth-service-app
+    spec:
+      containers:
+        - name: auth-service-container
+          image: shubham470/authentication_service:prod
+          ports:
+            - containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: springnexus-config
+            - secretRef:
+                name: springnexus-secrets
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /volume/database_service.db
+              subPath: database_service.db
+      volumes:
+        - name: sqlite-volume
+          persistentVolumeClaim:
+            claimName: sqlite-pvc
