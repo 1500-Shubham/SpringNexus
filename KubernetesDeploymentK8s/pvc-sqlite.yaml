@@ -1,0 +1,13 @@
+# pvc-sqlite.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sqlite-pvc
+  namespace: springnexus
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: sqlite-pv  # bind to our specific PV

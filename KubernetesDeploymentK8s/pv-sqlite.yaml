@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sqlite-pv
+  namespace: springnexus
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/springnexus/volumeMounting/
+  persistentVolumeReclaimPolicy: Retain
+
+#  this is the file which will be mounted from 
+# Example in your authentication-service deployment
+# volumeMounts:
+#   - name: sqlite-volume
+#     mountPath: /volume/database_service.db
+#     subPath: database_service.db
+
+# volumes:
+#   - name: sqlite-volume
+#     persistentVolumeClaim:
+#       claimName: sqlite-pvc
