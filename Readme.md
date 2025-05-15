@@ -107,6 +107,111 @@ then this manager uses UserDetails to fetch username and password and it know pa
 - Created a nginx.yml file to have nginx image and provided nginx config which has location to server mapping for forwarding.
 - Mounted nginx.conf local to container location 
 
-## Deployment
-- 1) Docker-Containerization (scratch.txt for all documentation)
-- 2) Kubernetes
+## Docker Containerisation Deployment
+- DockerFile of BackendApplication
+    - To optimize the Dockerfile, you only need to copy:
+    The Maven wrapper (mvnw and .mvn) for building.
+    The pom.xml to resolve dependencies.
+    The src/ directory for source code.
+
+- image name to Dockerfile
+    - docker build --build-arg PROFILE=prod -t authentication_service:prod .
+    - docker build --build-arg PROFILE=prod -t database_service:prod .
+    - docker build --build-arg PROFILE=prod -t ollama_service:prod .
+    - docker build --build-arg PROFILE=prod -t elastic_service:prod .
+
+- Separetly run yml of this service
+docker-compose.yml and .env inside it 
+
+- Combine images of everything
+docker compose --env-file .env up -d
+
+- Compose up normal yml files
+docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
+
+- SAME NETWORK 
+    - For one container to understand other container name and ip make sure both are on same NETWORK
+    EX: authentication_service env DATABASE_SERVICE_URL=http://database-service:8081 will only work
+
+    - ALSO MAKE SURE
+    Root Cause: Separate docker-compose files → Separate Networks
+    Even though both services declare spring-nexus as their network in their own docker-compose files, 
+    Docker creates separate networks with similar names scoped to each compose project, 
+    unless you explicitly share the same external network.
+    - METHOD-1 ALL Container in same yml file and same network
+    - METHOD-2 Diffenent container on different yml and external network
+    docker network create spring-nexus
+    ` networks:
+        spring-nexus:
+        external: true `
+
+## Kubernetes K8s Deployment
+- DockerHub - Images of backend build locally can be send here
+    - Tag your image - docker tag authentication_service:dev shubham123/authentication_service:dev
+    - Login to DockerHub - docker login
+    - Push to DockerHub - docker push shubham123/authentication_service:dev
+    - Refer inside yml- image: shubham470/springnexus:authentication_service-prod
+
+- Minikube- Local Single Node K8 Cluster
+    - brew install minikube
+    - minikube start --driver=docker //This spins up a local K8s cluster inside a Docker container
+    - kubectl get nodes // Confirming Setup
+    - minikube ip http://<minikube-ip>:30083 //access it in your browser or API tool via:
+        - But if minikube running in docker container get service url using:
+        - `minikube service auth-service-nodeport -n spring-nexus --url`
+    - Since SQLLite DB need to be present inside minikube container we can mount it
+        - `minikube mount /Users/shubhamkeshari/Documents/VSCode/SpringNexus/KubernetesDeploymentK8s/VolumeMounting:/mnt/springnexus/volumeMounting` And then set the PVC's volume to use a hostPath: since hostPath is localStorage now
+         - Now All yaml file can directly access this sqllite db like `path: /mnt/springnexus/database_service.db` 
+         - If you delete the Minikube VM/container, all Kubernetes state (including PVCs using hostPath) will be lost : : But is that path is mounted to your system then those changes will be saved inside your computer
+        
+        
+- Namespaces //virtualCluster within K8 cluter
+    - kubectl apply -f namespace.yaml
+    - kubectl get ns
+
+- ConfigMap- Instead of env use this to declare these variables inside yml Can use inside container environment variables not inside PVC or PV(Resource related)
+    - kubectl get configmap
+    - kubectl apply -f configmap.yaml
+    - kubectl get configmap -n spring-nexus
+    - kubectl describe configmap springnexus-config -n spring-nexus
+    - Your environment variables into a Kubernetes ConfigMap, and also use `service names as internal DNS` references to allow services to talk to each other within the cluster.
+
+- Secret- 
+    - kubectl get secrets
+    - kubectl apply -f secret.yaml
+
+- PVC and PV
+    - First create PV associated with a volume (can be hostPath) then a claim PVC is done on this PV
+    - Mount the PVC in Your Deployment (So in Kubernetes mouting of volume is done using PVC)
+    - Process PV -> PVC create then inside Deployment -> Volumes(use PVC) -> volume Mounts(Like Docker that container path to outside Volume)
+    - kubectl get pv
+    - kubectl get pvc -n spring-nexus
+    - kubectl describe pv sqlite-pv -n spring-nexus
+    - kubectl describe pvc sqlite-pvc -n spring-nexus
+    - kubectl delete pvc sqlite-pvc -n spring-nexus
+    - Using Storage Class
+      - Provisioners Cloud ex.AWS EBS StorageClass kind: StorageClass
+      - StorageClass -> PVC -> PV
+
+- Deployment, PODS and Service
+    - [Deployment]
+        └─ matchLabels: app=auth-service
+            ↓
+        [Creates Pods with labels: app=auth-service, component=auth-service-app]
+            ↑
+        [Service with selector: app=auth-service]
+        └─ routes traffic to those Pods
+
+- Commands- 
+    - kubectl get pods
+    - kubectl describe pods auth-service-deployment-7fbb65f78-tgwqf -n spring-nexus
+    - kubectl get svc
+    - kubectl apply -f authentication-service-deployment.yml
+    - kubectl logs pod-name
+    - kubectl logs -f pod-name //stream logs
+    -   kubectl delete all --all -n spring-nexus
+    - kubectl delete configmap | pvc | pv --all -n 
+    - kubectl delete service <service-name> -n <namespace>
+    - kubectl scale deployment <deployment-name> --replicas=0 -n <namespace>
+
+

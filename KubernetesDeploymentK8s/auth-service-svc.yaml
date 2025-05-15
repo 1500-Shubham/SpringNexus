@@ -1,16 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service-nodeport
+  name: auth-service-svc
   namespace: spring-nexus
   labels:
     app: auth-service
     tier: backend
 spec:
-  type: NodePort
+  type: ClusterIP  # Internal cluster-only service
   selector:
     app: auth-service
   ports:
-    - port: 8083           # Cluster-internal port
+    - port: 8083           # Cluster-internal service port
       targetPort: 8083     # Port your container listens on
-      nodePort: 30083      # External NodePort (range: 30000-32767)
