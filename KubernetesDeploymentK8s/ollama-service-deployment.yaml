@@ -1,0 +1,30 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-service-deployment
+  namespace: spring-nexus
+  labels:
+    app: ollama-service-app
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-service-app
+  template:
+    metadata:
+      labels:
+        app: ollama-service-app
+        component: ollama-service-app
+    spec:
+      containers:
+        - name: ollama-service-container
+          image: shubham470/ollama_service:prod
+          ports:
+            - containerPort: 8082
+          envFrom:
+            - configMapRef:
+                name: springnexus-config
+            - secretRef:
+                name: springnexus-secrets

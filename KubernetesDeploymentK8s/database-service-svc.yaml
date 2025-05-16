@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service-svc
+  namespace: spring-nexus
+  labels:
+    app: database-service
+    tier: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: database-service
+  ports:
+    - port: 8081          # Cluster-internal port
+      targetPort: 8081    # Container port

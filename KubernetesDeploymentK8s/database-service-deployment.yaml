@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-service-deployment
+  namespace: spring-nexus
+  labels:
+    app: database-service
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-service
+  template:
+    metadata:
+      labels:
+        app: database-service
+        component: database-service-app
+    spec:
+      containers:
+        - name: database-service-container
+          image: shubham470/database_service:prod
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: springnexus-config
+            - secretRef:
+                name: springnexus-secrets
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /volume/database_service.db
+              subPath: database_service.db
+      volumes:
+        - name: sqlite-volume
+          persistentVolumeClaim:
+            claimName: sqlite-pvc

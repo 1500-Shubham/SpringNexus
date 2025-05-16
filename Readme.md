@@ -213,5 +213,11 @@ docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
     - kubectl delete configmap | pvc | pv --all -n 
     - kubectl delete service <service-name> -n <namespace>
     - kubectl scale deployment <deployment-name> --replicas=0 -n <namespace>
+    - kubectl exec -n spring-nexus -it pod/ollama-deployment-86cdc8d876-5gpwk -- bash
+    - kubectl rollout restart deployment <deployment-name> -n <namespace>
+
+    
+- K8s Points to Note-
+    - Change the OLLAMA_SERVER_URL to explicitly use port 11434: -> http://ollama-service:11434/api/generate {if not port mentioned then listen to 80 port}
 
 

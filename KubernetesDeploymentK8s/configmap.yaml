@@ -25,17 +25,19 @@ data:
   TWILIO_PHONE_NUMBER: "+18129004263"
 
   # URLs (use internal service names)
-  DATABASE_SERVICE_URL: http://database-service:8081
-  AUTHENTICATION_SERVICE_URL: http://auth-service:8083
-  OLLAMA_SERVICE_URL: http://ollama-service:8082
-  OLLAMA_SERVER_URL: http://ollama:11434/api/generate
+  DATABASE_SERVICE_URL: http://database-service-svc
+  AUTHENTICATION_SERVICE_URL: http://auth-service-svc
+  OLLAMA_SERVICE_URL: http://ollama-service-svc
+  OLLAMA_SERVER_URL: http://ollama-service:11434/api/generate
 
-  # Kafka / Elastic config
-  KAFKA_BOOTSTRAP_SERVERS: kafka-zooker:9092
+  # Kafka 
+  KAFKA_BOOTSTRAP_SERVERS: kafka-service
   KAFKA_TOPIC_NAME: log-topic
   KAFKA_CONSUMER_GROUP_ID: log-consumer-group
   KAFKA_CONSUMER_TOPIC_NAME: log-topic
   KAFKA_AUTO_OFFSET_RESET: earliest
+
+  #Elastic
   ELASTIC_REACTIVE_CLIENT_ENABLED: "false"
   ELASTIC_CLUSTER_NODES: elastic-search:9200
   ELASTIC_CLUSTER_NAME: docker-cluster
