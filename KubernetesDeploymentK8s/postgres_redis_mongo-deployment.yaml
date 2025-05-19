@@ -1,0 +1,109 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  namespace: spring-nexus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "shubham"
+            - name: POSTGRES_PASSWORD
+              value: "shubham"
+            - name: POSTGRES_DB
+              value: "payload_db"
+          volumeMounts:
+            - name: pg-data
+              mountPath: /var/lib/postgresql/data
+              # subPath: postgres-data
+      volumes:
+        - name: pg-data
+          emptyDir: {}
+        # - name: sqlite-volume #Unable to mount postgres container to minikube permission issue
+        #   persistentVolumeClaim:
+        #     claimName: sqlite-pvc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  namespace: spring-nexus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "shubham"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "shubham"
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-data
+          emptyDir: {}
+
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  namespace: spring-nexus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+          env:
+            - name: REDIS_PASSWORD
+              value: "shubham" # Optional, redis-server doesn't use this env var by default
+          command: ["redis-server", "--requirepass", "shubham"]
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /data
+              subPath: redis-data
+          securityContext:
+            runAsUser: 0
+      volumes:
+        - name: sqlite-volume
+          persistentVolumeClaim:
+            claimName: sqlite-pvc
+

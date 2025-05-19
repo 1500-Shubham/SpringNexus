@@ -39,5 +39,5 @@ data:
 
   #Elastic
   ELASTIC_REACTIVE_CLIENT_ENABLED: "false"
-  ELASTIC_CLUSTER_NODES: elastic-search:9200
+  ELASTIC_CLUSTER_NODES: elasticsearch-svc:9200
   ELASTIC_CLUSTER_NAME: docker-cluster

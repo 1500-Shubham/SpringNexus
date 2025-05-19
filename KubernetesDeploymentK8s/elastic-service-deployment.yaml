@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic-service
+  namespace: spring-nexus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elastic-service
+  template:
+    metadata:
+      labels:
+        app: elastic-service
+    spec:
+      containers:
+        - name: elastic-service
+          image: shubham470/elastic_service:prod
+          ports:
+            - containerPort: 8084
+          envFrom:
+            - configMapRef:
+                name: springnexus-config
