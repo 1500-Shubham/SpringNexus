@@ -160,6 +160,7 @@ docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
         - But if minikube running in docker container get service url using:
         - `minikube service auth-service-nodeport -n spring-nexus --url`
     - Since SQLLite DB need to be present inside minikube container we can mount it
+        - First minikube start -> mount -> deployment and svc up
         - `minikube mount /Users/shubhamkeshari/Documents/VSCode/SpringNexus/KubernetesDeploymentK8s/VolumeMounting:/mnt/springnexus/volumeMounting` And then set the PVC's volume to use a hostPath: since hostPath is localStorage now
          - Now All yaml file can directly access this sqllite db like `path: /mnt/springnexus/database_service.db` 
          - If you delete the Minikube VM/container, all Kubernetes state (including PVCs using hostPath) will be lost : : But is that path is mounted to your system then those changes will be saved inside your computer
@@ -209,7 +210,7 @@ docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
     - kubectl apply -f authentication-service-deployment.yml
     - kubectl logs pod-name
     - kubectl logs -f pod-name //stream logs
-    -   kubectl delete all --all -n spring-nexus
+    - kubectl delete all --all -n spring-nexus
     - kubectl delete configmap | pvc | pv --all -n 
     - kubectl delete service <service-name> -n <namespace>
     - kubectl scale deployment <deployment-name> --replicas=0 -n <namespace>
@@ -218,6 +219,6 @@ docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
 
     
 - K8s Points to Note-
-    - Change the OLLAMA_SERVER_URL to explicitly use port 11434: -> http://ollama-service:11434/api/generate {if not port mentioned then listen to 80 port}
+    - Change the OLLAMA_SERVER_URL to explicitly use port 11434: -> http://ollama-service:11434/api/generate {if not port mentioned then listen to 80 port like http://ollama-service:80}
 
 

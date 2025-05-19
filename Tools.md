@@ -43,6 +43,9 @@
 **docker exec -it kafka-zooker kafka-console-producer --topic my-topic --bootstrap-server localhost:9092**
 - **Consume Messages**:  
 **docker exec -it kafka-zooker kafka-console-consumer --topic my-topic --bootstrap-server localhost:9092 --from-beginning**
+- Kubernetes (Using bash directly)
+  - kubectl exec -n spring-nexus -it kafka-zookeeper-deployment-7d59f6c458-hs6zh -c kafka -- bash
+  - kafka-topics --bootstrap-server localhost:9092 --list
 
 ---
 
