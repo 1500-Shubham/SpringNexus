@@ -19,7 +19,7 @@ public class KafkaController {
     }
 
     // Endpoint to get all logs
-    @GetMapping
+    @GetMapping("localmap")
     public Collection<LogDTO> getAllLogs() {
         return KafkaDatabaseElastic.getAllLogs();
     }

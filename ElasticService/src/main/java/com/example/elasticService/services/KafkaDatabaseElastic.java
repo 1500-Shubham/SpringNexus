@@ -5,6 +5,8 @@ package com.example.elasticService.services;
 import com.example.elasticService.dto.LogDTO;
 //import com.example.elasticService.models.LogEntity;
 //import com.example.elasticService.repositories.LogRepository;
+import com.example.elasticService.models.LogEntity;
+import com.example.elasticService.repositories.LogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,10 +23,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @EnableKafka
 public class KafkaDatabaseElastic {
     private final Map<String, LogDTO> logStore = new ConcurrentHashMap<>();
-//    private final LogRepository logRepository;
-//    public KafkaDatabaseElastic(LogRepository logRepository) {
-//        this.logRepository = logRepository;
-//    }
+    private final LogRepository logRepository;
+    public KafkaDatabaseElastic(LogRepository logRepository) {
+        this.logRepository = logRepository;
+    }
 
 //    private final LogServiceElasticBean logServiceElasticBean;
 //    public KafkaDatabaseElastic(LogServiceElasticBean logServiceElasticBean) {
@@ -42,7 +44,9 @@ public class KafkaDatabaseElastic {
             LogDTO log = objectMapper.readValue(message, LogDTO.class);
             System.out.println("My Log looks like from Kafka: " + log);
             // Save the log to Elasticsearch
-//            logRepository.save(log);
+            LogEntity logEntity = objectMapper.readValue(message, LogEntity.class);
+            logRepository.save(logEntity);
+
             log.setId(UUID.randomUUID().toString());
             storeLog(log);
             System.out.println("Consumed and stored log: " + log);

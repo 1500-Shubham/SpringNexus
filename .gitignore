@@ -1,1 +1,4 @@
-VolumeMounting/
+VolumeMounting
+KubernetesDeploymentK8s/VolumeMounting/models/*
+KubernetesDeploymentK8s/VolumeMounting/id_ed25519
+KubernetesDeploymentK8s/VolumeMounting/id_ed25519.pub

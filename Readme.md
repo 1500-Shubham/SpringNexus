@@ -220,5 +220,6 @@ docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
     
 - K8s Points to Note-
     - Change the OLLAMA_SERVER_URL to explicitly use port 11434: -> http://ollama-service:11434/api/generate {if not port mentioned then listen to 80 port like http://ollama-service:80}
+    - Database connection use host->service name use for DNS resolution
 
 
