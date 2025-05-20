@@ -1,0 +1,1430 @@
+{
+	"info": {
+		"_postman_id": "f29fb09b-8a10-4e72-9152-3efc9d1fef1a",
+		"name": "SpringNexus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29227666"
+	},
+	"item": [
+		{
+			"name": "ElasticService",
+			"item": [
+				{
+					"name": "KafkaGetAllLogs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:58353/kafkaLogs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "58353",
+							"path": [
+								"kafkaLogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllLogs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLogs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"shubham2\",\n    \"level\": \"INDO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteByID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/logs/delete/id/?id=1e89cfff-0ce8-4160-b037-606dc1176362",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logs",
+								"delete",
+								"id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1e89cfff-0ce8-4160-b037-606dc1176362"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteByLevel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/logs/delete/level/?level=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logs",
+								"delete",
+								"level",
+								""
+							],
+							"query": [
+								{
+									"key": "level",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByLevel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/logs/level?level=DBtoElastic",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logs",
+								"level"
+							],
+							"query": [
+								{
+									"key": "level",
+									"value": "DBtoElastic"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByMessage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/logs/search?message=This is a info message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"logs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "This is a info message"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DatabaseService",
+			"item": [
+				{
+					"name": "PostLogViaKafka",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Message\",\n    \"level\": \"Store TO KAFKA Check local storage\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createConnection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"type\": \"mongodb\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 27017,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n{\n  \"type\": \"redis\",\n  \"connectionDetails\": {\n    \"host\": \"localhost\",\n    \"port\": 6379,\n    \"username\": \"shubham\",\n    \"password\": \"shubham\"\n  }\n}\n\n// {\n//   \"type\": \"postgres\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 5432,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/connections/create?userId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"connections",
+								"create"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteConnection",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/connections/delete?connectionId=19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"connections",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "connectionId",
+									"value": "19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logoutUser-DeleteMapValue",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/connections/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"connections",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchAllConnections",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/connections/fetch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"connections",
+								"fetch"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StorePayloadAllDatabases",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "10",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\":\"heraPheri\",\n    \"rating\":\"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/database/storePayload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"database",
+								"storePayload"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/database/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"database",
+								"test"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OllamaService",
+			"item": [
+				{
+					"name": "askQuestion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\":\"llama2\",\n    \"system\":\"Generate\",\n    \"prompt\":\"2+2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/ollama/askQuestion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"ollama",
+								"askQuestion"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthenticationService",
+			"item": [
+				{
+					"name": "Forwarders",
+					"item": [
+						{
+							"name": "DbSvcTest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHViaGFtIiwiaWF0IjoxNzQ2NzA4MzQ2LCJleHAiOjE3NDY3OTQ3NDZ9.ZyFnjEo17XUBYZWsJzYzhSg5nqaGyCIcTHn3bosSMnI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/database/test?userId=4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"database",
+										"test"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DbSvcPostLogViaKafka",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b3BwbyIsImlhdCI6MTc0Njc3MTE0NCwiZXhwIjoxNzQ2ODU3NTQ0fQ.1iIB9YN63zrxuQEHCad50wuRaL7kXi8PhN_2nCNNBQo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"MessageToKafka\",\n    \"level\": \"DBtoElastic\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/logs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"logs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DbSvcCreateConnection",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHViaGFtIiwiaWF0IjoxNzQ2NzA4MzQ2LCJleHAiOjE3NDY3OTQ3NDZ9.ZyFnjEo17XUBYZWsJzYzhSg5nqaGyCIcTHn3bosSMnI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"mongodb\",\n  \"connectionDetails\": {\n    \"host\": \"localhost\",\n    \"port\": 27017,\n    \"username\": \"shubham\",\n    \"password\": \"shubham\"\n  }\n}\n\n// {\n//   \"type\": \"redis\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 6379,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"postgres\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 5432,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/connections/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"connections",
+										"create"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DbSvcDeleteConnection",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHViaGFtIiwiaWF0IjoxNzQ2NzA4MzQ2LCJleHAiOjE3NDY3OTQ3NDZ9.ZyFnjEo17XUBYZWsJzYzhSg5nqaGyCIcTHn3bosSMnI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/connections/delete?connectionId=21",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"connections",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "connectionId",
+											"value": "21"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DbSvcFetchAllConnection",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHViaGFtIiwiaWF0IjoxNzQ2NzA4MzQ2LCJleHAiOjE3NDY3OTQ3NDZ9.ZyFnjEo17XUBYZWsJzYzhSg5nqaGyCIcTHn3bosSMnI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/connections/fetch",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"connections",
+										"fetch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DbSvcLogoutUser-DeleteMapValue",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b3BwbyIsImlhdCI6MTc0Njc3MTE0NCwiZXhwIjoxNzQ2ODU3NTQ0fQ.1iIB9YN63zrxuQEHCad50wuRaL7kXi8PhN_2nCNNBQo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/connections/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"connections",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DbSvcStorePayloadAllDatabases",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHViaGFtIiwiaWF0IjoxNzQ2NzA4MzQ2LCJleHAiOjE3NDY3OTQ3NDZ9.ZyFnjEo17XUBYZWsJzYzhSg5nqaGyCIcTHn3bosSMnI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"movie\":\"heraPheri\",\n    \"rating\":\"10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/forward/dbservice/database/storePayload",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"dbservice",
+										"database",
+										"storePayload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OllamaSvcAskQuestion",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"model\":\"llama2\",\n    \"system\":\"Generate\",\n    \"prompt\":\"2+2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/forward/ollamaservice/ollama/askQuestion",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"forward",
+										"ollamaservice",
+										"ollama",
+										"askQuestion"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "dbRegisterPermitAll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"satyam\",\n  \"email\": \"satyam@example.com\",\n  \"password\": \"password123\",\n  \"phone\": \"+1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/db/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"db",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dbLoginPermitAll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"usernameOrEmail\": \"shubham@example.com\",\n//   \"password\": \"password123\"\n// }\n\n{\n  \"usernameOrEmail\": \"toppo\",\n  \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/db/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"db",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TwilioSendOTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/TwilioOTP/sendOtp?phoneNumber=+919309077697",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"TwilioOTP",
+								"sendOtp"
+							],
+							"query": [
+								{
+									"key": "phoneNumber",
+									"value": "+919309077697"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TwilioVerifyOTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/TwilioOTP/verifyOtp?phoneNumber=+919309077697&otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"TwilioOTP",
+								"verifyOtp"
+							],
+							"query": [
+								{
+									"key": "phoneNumber",
+									"value": "+919309077697"
+								},
+								{
+									"key": "otp",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OauthLoginRegister",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/oauth/loginOrRegister",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"oauth",
+								"loginOrRegister"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test-JWT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHViaGFtIiwiaWF0IjoxNzQ2NDM4NDY0LCJleHAiOjE3NDY1MjQ4NjR9._qzMNpgzE289FMWYCPAlqSyRCw3TIhnEPYfYtz4RQqk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authenticatorOTPVerifyAndLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"toppo\",\n  \"password\": \"password123\",\n  \"otp\":858044\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/authenticatorOTP/verfiyAndLogin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"authenticatorOTP",
+								"verfiyAndLogin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nginx",
+			"item": [
+				{
+					"name": "NginxToAuthenticationServiceTest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usernameOrEmail\": \"shubham@example.com\",\n  \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:80/db/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"db",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kubernetes",
+			"item": [
+				{
+					"name": "Auth-ServiceLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"usernameOrEmail\": \"shubham@example.com\",\n//   \"password\": \"password123\"\n// }\n\n{\n  \"usernameOrEmail\": \"toppo\",\n  \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:64914/db/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "64914",
+							"path": [
+								"db",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ollamaService",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\":\"llama2\",\n    \"system\":\"Generate\",\n    \"prompt\":\"2+2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:62702/ollama/askQuestion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "62702",
+							"path": [
+								"ollama",
+								"askQuestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Database-CreateConnection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "10",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"type\": \"mongodb\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 27017,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"redis\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 6379,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"postgres\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 5432,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n{\n  \"type\": \"mongodb\",\n  \"connectionDetails\": {\n    \"host\": \"mongodb\",\n    \"port\": 27017,\n    \"username\": \"shubham\",\n    \"password\": \"shubham\"\n  }\n}\n\n// {\n//   \"type\": \"redis\",\n//   \"connectionDetails\": {\n//     \"host\": \"redis-container\",\n//     \"port\": 6379,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"postgres\",\n//   \"connectionDetails\": {\n//     \"host\": \"postgres_server\",\n//     \"port\": 5432,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:64159/connections/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "64159",
+							"path": [
+								"connections",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Database-KafkaPostLog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Message\",\n    \"level\": \"Checking local\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Database-StorePayloadAllDatabases",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "100",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\":\"heraPheri\",\n    \"rating\":\"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:56949/database/storePayload",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "56949",
+							"path": [
+								"database",
+								"storePayload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthToDataseForwarder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b3BwbyIsImlhdCI6MTc0NzE1OTIzMCwiZXhwIjoxNzQ3MjQ1NjMwfQ.PUzP2DQXLPIOpsJlClO-z_HlIKQTdodpi0ubP9Ratos",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"type\": \"mongodb\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 27017,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"redis\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 6379,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"postgres\",\n//   \"connectionDetails\": {\n//     \"host\": \"localhost\",\n//     \"port\": 5432,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"mongodb\",\n//   \"connectionDetails\": {\n//     \"host\": \"mongodb\",\n//     \"port\": 27017,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n// {\n//   \"type\": \"redis\",\n//   \"connectionDetails\": {\n//     \"host\": \"redis-container\",\n//     \"port\": 6379,\n//     \"username\": \"shubham\",\n//     \"password\": \"shubham\"\n//   }\n// }\n\n{\n  \"type\": \"postgres\",\n  \"connectionDetails\": {\n    \"host\": \"postgres_server\",\n    \"port\": 5432,\n    \"username\": \"shubham\",\n    \"password\": \"shubham\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:64478/forward/dbservice/connections/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "64478",
+							"path": [
+								"forward",
+								"dbservice",
+								"connections",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthToOllamaForwarder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b3BwbyIsImlhdCI6MTc0NzE1OTIzMCwiZXhwIjoxNzQ3MjQ1NjMwfQ.PUzP2DQXLPIOpsJlClO-z_HlIKQTdodpi0ubP9Ratos",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\":\"llama2\",\n    \"system\":\"Generate\",\n    \"prompt\":\"what is 99+99\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:64914/forward/ollamaservice/ollama/askQuestion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "64914",
+							"path": [
+								"forward",
+								"ollamaservice",
+								"ollama",
+								"askQuestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NginxToAuthServiceDBLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//   \"usernameOrEmail\": \"shubham@example.com\",\n//   \"password\": \"password123\"\n// }\n\n{\n  \"usernameOrEmail\": \"toppo\",\n  \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:59908/forward/dbservice/logs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "59908",
+							"path": [
+								"forward",
+								"dbservice",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NginxToAuthServiceForwarderDbDvcPostLogViaKafka",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b3BwbyIsImlhdCI6MTc0NzQwMTI5NiwiZXhwIjoxNzQ3NDg3Njk2fQ.I6BwTRUeCMaGTeb1icYFrH-bHkx2YyPyP6MDoIuYAMY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"MessageToKafka\",\n    \"level\": \"DockerDone\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:59908/db/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "59908",
+							"path": [
+								"db",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NginxToElasticGetAllLogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:59908/elasticService/kafkaLogs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "59908",
+							"path": [
+								"elasticService",
+								"kafkaLogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

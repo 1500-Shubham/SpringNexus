@@ -216,10 +216,10 @@ docker-compose -f Kafka-LocalListener.yml -p kafka_zookeper-local up -d
     - kubectl scale deployment <deployment-name> --replicas=0 -n <namespace>
     - kubectl exec -n spring-nexus -it pod/ollama-deployment-86cdc8d876-5gpwk -- bash
     - kubectl rollout restart deployment <deployment-name> -n <namespace>
-
+    - minikube service auth-service-nodeport -n spring-nexus --url
     
 - K8s Points to Note-
     - Change the OLLAMA_SERVER_URL to explicitly use port 11434: -> http://ollama-service:11434/api/generate {if not port mentioned then listen to 80 port like http://ollama-service:80}
     - Database connection use host->service name use for DNS resolution
-
+    - Kubernetes how we can make sure one service runs after another like in docker we use [depends on] 
 

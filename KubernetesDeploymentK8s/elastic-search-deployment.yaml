@@ -26,6 +26,15 @@ spec:
               value: "false"
             - name: xpack.security.enrollment.enabled
               value: "false"
+            - name: ES_JAVA_OPTS
+              value: "-Xms512m -Xmx512m"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
           volumeMounts:
             - name: elastic-data
               mountPath: /usr/share/elasticsearch/data

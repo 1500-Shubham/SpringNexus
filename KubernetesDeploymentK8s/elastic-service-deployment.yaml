@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: elastic-service
-          image: shubham470/elastic_service:prod
+          image: shubham470/elastic_service_without_logrepo:prod
           ports:
             - containerPort: 8084
           envFrom:

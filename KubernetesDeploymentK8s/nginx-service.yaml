@@ -7,10 +7,11 @@ metadata:
     app: nginx
     tier: gateway
 spec:
-  type: NodePort  # Expose it to host machine
+  # type: NodePort  # Expose it to host machine
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30080  # You can pick any port between 30000–32767
+      # nodePort: 30080  # You can pick any port between 30000–32767
